@@ -8,11 +8,32 @@
 
 body{
   font-family: 'Poppins', sans-serif; 
-  background-color: #6A93CB !important;
+background-color: #0f0f0f  !important;
 }
 
 #welcomePage{
   text-align: center;
-  margin-top: 7rem;
+  margin-top: 6rem;
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  align-items: center;
 }
 
+input[type="text"] {
+  padding: .8rem;
+  border-radius: .4rem;
+  border: .1rem solid #ccc;
+  margin-right: .7rem;
+}
+
+#quizPage{
+  text-align: center;
+  margin-top: 50px;
+}
+
+#resultPage {
+  text-align: center;
+  margin-top: 50px;
+  color: white;
+}

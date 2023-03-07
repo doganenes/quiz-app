@@ -89,3 +89,65 @@ const randomTextColor = () => {
 setInterval(() => {
   welcomeMessage.style.color = randomTextColor();
 }, 500);
+
+let welcomePage = document.getElementById("welcomePage");
+let quizPage = document.getElementById("quizPage");
+let resultPage = document.getElementById("resultPage");
+
+let answers = [];
+let current = 0;
+
+function startQuiz() {
+  let nameInput = document.getElementById("name");
+  let name = nameInput.value;
+  if (name !== "") {
+    welcomePage.style.display = "none";
+    quizPage.style.display = "block";
+    getQuestions();
+  }
+}
+
+function getQuestions() {
+  let question = questionsData[current];
+  quizPage = "";
+  quizPage += "<h2>" + question.question + "</h2>";
+  for (let i = 0; i < question.options.length; i++) {
+    quizPage.innerHTML +=
+      "<button onclick=\"takeAnswer('" +
+      question.options[i] +
+      "')\">" +
+      question.options[i] +
+      "</button><br><br>";
+  }
+}
+
+function takeAnswer(answer) {
+  answers.push(answer);
+  current++;
+  if (current < questionsData.length) {
+    getQuestions();
+  } else {
+    getResult();
+  }
+}
+
+function getResult() {
+  let correctAnswers = 0;
+  for (let i = 0; i < questionsData.length; i++) {
+    if (answers[i] === questionsData[i].answer) {
+      correctAnswers++;
+    }
+  }
+
+  let resultMessage =
+    "Congratulations " +
+    name.value +
+    "! You can correct " +
+    correctAnswers +
+    " from " +
+    questionsData.length +
+    " questions.";
+  quizPage.style.display = "none";
+  resultPage.style.display = "block";
+  resultPage.innerHTML = "<h2>" + resultMessage + "</h2>";
+}
