@@ -109,8 +109,7 @@ function startQuiz() {
 
 function getQuestions() {
   let question = questionsData[current];
-  quizPage = "";
-  quizPage += "<h2>" + question.question + "</h2>";
+  quizPage.innerHTML = "<h2>" + question.question + "</h2>";
   for (let i = 0; i < question.options.length; i++) {
     quizPage.innerHTML +=
       "<button onclick=\"takeAnswer('" +
@@ -118,6 +117,10 @@ function getQuestions() {
       "')\">" +
       question.options[i] +
       "</button><br><br>";
+  }
+
+  if (current >= questionsData.length) {
+    getResult(nameInput);
   }
 }
 
@@ -127,11 +130,11 @@ function takeAnswer(answer) {
   if (current < questionsData.length) {
     getQuestions();
   } else {
-    getResult();
+    getResult(name);
   }
 }
 
-function getResult() {
+function getResult(name) {
   let correctAnswers = 0;
   for (let i = 0; i < questionsData.length; i++) {
     if (answers[i] === questionsData[i].answer) {
