@@ -29,12 +29,35 @@ input[type="text"] {
 
 #quizPage {
   text-align: center;
-  margin-top: 50px;
   background-color: white;
   position: absolute;
   left: 50%;
+  max-width: 60vw;
   top: 50%;
-  transform: translate(-50%,-50%);
+  min-height: 70vh;
+  border-radius: 1rem;
+  width: 100%;
+  transform: translate(-50%, -50%);
+}
+
+#quizPage h3 {
+  margin: 3rem 0;
+  text-align: center;
+  padding: 0 5rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+#quizPage button{
+border-radius: 10px;
+height: auto;
+background-color: #CCCCCC !important;
+transition: 0.6s ease;
+}
+
+#quizPage button:hover{
+  background-color: #a19e9e !important;
 }
 
 #resultPage {

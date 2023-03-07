@@ -109,12 +109,13 @@ function startQuiz() {
 
 function getQuestions() {
   let question = questionsData[current];
-  quizPage.innerHTML = "<h2>" + question.question + "</h2>";
+  quizPage.innerHTML =
+    "<h3 style='margin-bottom:2rem'>" + question.question + "</h3>";
   for (let i = 0; i < question.options.length; i++) {
     quizPage.innerHTML +=
-      "<button onclick=\"takeAnswer('" +
+      "<button class='btn w-50 btn-lg' onclick=\"takeAnswer('" +
       question.options[i] +
-      "')\">" +
+      "')\"'>" +
       question.options[i] +
       "</button><br><br>";
   }
@@ -144,7 +145,7 @@ function getResult(name) {
 
   let resultMessage =
     "Congratulations " +
-    name.value +
+    name +
     "! You can correct " +
     correctAnswers +
     " from " +
