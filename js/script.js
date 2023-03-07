@@ -74,3 +74,13 @@ const questionsData = [
     answer: "Not only SQL",
   },
 ];
+
+let welcomeMessage = document.getElementById("welcomeMessage");
+const colors = ["#030ffc", "#6e051c", "#1ba112", "#d02b", "#f542bc"];
+
+let i = 0;
+setInterval(() => {
+  i = i % colors.length;
+  welcomeMessage.style.color = colors[i];
+  i++;
+}, 500);
