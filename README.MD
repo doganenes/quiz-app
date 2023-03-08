@@ -4,3 +4,18 @@
 Review Slider Project using HTML5, CSS3, and Javascript, and Bootstrap.
 
 Live Preview: [https://doganenes.github.io/quiz-app/](https://doganenes.github.io/quiz-app/)
+
+## Built with
+
+- [HTML5](https://html5.org/)
+- [CSS3](https://developer.mozilla.org/en-US/docs/Web/CSS)
+- [Javascript](https://www.javascript.com/)
+
+## Development
+
+To get a local copy of the code, clone it using git:
+
+```
+git clone https://github.com/doganenes/quiz-app.git
+cd quiz-app
+```
