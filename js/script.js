@@ -148,7 +148,7 @@ function getResult() {
 
   let resultMessage = `Congratulations ${name}! <br/>You answered
     <span class='correctAnswer'>${correctAnswers}</span> out of
-    ${questionsData.length} questions correctly. <br/> <button class='playAgain btn btn-warning mt-3'>Play Again</button>`;
+    ${questionsData.length} questions correctly. <br/> <button class='playAgain btn btn-warning mt-4'>Play Again</button>`;
   quizPage.style.display = "none";
   resultPage.style.display = "block";
   resultPage.innerHTML = "<h2 class='resultMessage'>" + resultMessage + "</h2>";
@@ -161,3 +161,4 @@ function getResult() {
     resultPage.style.display = "none";
   });
 }
+  
