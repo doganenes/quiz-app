@@ -10,6 +10,7 @@ Live Preview: [https://doganenes.github.io/quiz-app/](https://doganenes.github.i
 - [HTML5](https://html5.org/)
 - [CSS3](https://developer.mozilla.org/en-US/docs/Web/CSS)
 - [Javascript](https://www.javascript.com/)
+- [Bootstrap](https://getbootstrap.com/)
 
 ## Development
 
