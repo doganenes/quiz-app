@@ -113,7 +113,7 @@ function getQuestions() {
     "<h3 style='margin-bottom:2rem'>" + question.question + "</h3>";
   for (let i = 0; i < question.options.length; i++) {
     quizPage.innerHTML +=
-      "<button class='btn w-50 btn-lg' onclick=\"takeAnswer('" +
+      "<button class='btn w-75 btn-lg' onclick=\"takeAnswer('" +
       question.options[i] +
       "')\"'>" +
       question.options[i] +
@@ -131,11 +131,11 @@ function takeAnswer(answer) {
   if (current < questionsData.length) {
     getQuestions();
   } else {
-    getResult(name);
+    getResult();
   }
 }
 
-function getResult(name) {
+function getResult() {
   let correctAnswers = 0;
   for (let i = 0; i < questionsData.length; i++) {
     if (answers[i] === questionsData[i].answer) {
@@ -143,15 +143,21 @@ function getResult(name) {
     }
   }
 
-  let resultMessage =
-    "Congratulations " +
-    name +
-    "! You can correct " +
-    correctAnswers +
-    " from " +
-    questionsData.length +
-    " questions.";
+  let nameInput = document.querySelector("#name");
+  let name = nameInput.value;
+
+  let resultMessage = `Congratulations ${name}! <br/>You answered
+    <span class='correctAnswer'>${correctAnswers}</span> out of
+    ${questionsData.length} questions correctly. <br/> <button class='playAgain btn btn-warning mt-3'>Play Again</button>`;
   quizPage.style.display = "none";
   resultPage.style.display = "block";
-  resultPage.innerHTML = "<h2>" + resultMessage + "</h2>";
+  resultPage.innerHTML = "<h2 class='resultMessage'>" + resultMessage + "</h2>";
+
+  let playAgain = document.querySelector(".playAgain");
+  playAgain.addEventListener("click", () => {
+    current = 0;
+    answers = [];
+    startQuiz();
+    resultPage.style.display = "none";
+  });
 }
