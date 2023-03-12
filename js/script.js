@@ -18,7 +18,7 @@ const questionsData = [
   {
     question: "What is the release date of Javascript?",
     options: ["1995", "1996", "1997", "1998", "1999"],
-    answer: "1996",
+    answer: "1995",
   },
   {
     question: "Which is a CSS property?",
