@@ -52,7 +52,7 @@ const questionsData = [
     answer: "Hypertext Transfer Protocol",
   },
   {
-    question: 'What is the long form of  "CRUD?"',
+    question: 'What is the long form of "CRUD"?',
     options: [
       "CREATE REMOVE UPDATE DELETE",
       "CREATE READ UPDATE DELETE",
