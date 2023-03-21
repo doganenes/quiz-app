@@ -7,10 +7,10 @@ const questionsData = [
   {
     question: "What was the first web browser?",
     options: [
-      "Netscape Navigator",
       "Internet Explorer",
       "Google Chrome",
       "Firefox",
+      "Netscape Navigator",
       "Yandex",
     ],
     answer: "Netscape Navigator",
@@ -32,7 +32,7 @@ const questionsData = [
   },
   {
     question: "What is the most popular database management system?",
-    options: ["MySQL", "Oracle", "SQL Server", "PostgreSQL", "SQLLite"],
+    options: ["Oracle", "SQL Server", "PostgreSQL", "SQLLite", "MySQL"],
     answer: "MySQL",
   },
   {
@@ -65,8 +65,8 @@ const questionsData = [
   {
     question: "What is the long form of NoSQL?",
     options: [
-      "Not only SQL",
       "No SQL",
+      "Not only SQL",
       "Not One SQL",
       "Notation SQL",
       "Number One SQL",
