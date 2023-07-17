@@ -96,6 +96,8 @@ let resultPage = document.getElementById("resultPage");
 
 let answers = [];
 let current = 0;
+let isAnswered = false;
+let timer; // Zamanlayıcı değişkeni
 
 function startQuiz() {
   let nameInput = document.getElementById("name");
@@ -104,35 +106,52 @@ function startQuiz() {
     welcomePage.style.display = "none";
     quizPage.style.display = "block";
     getQuestions();
+    startTimer(); // Zamanlayıcıyı başlat
   }
 }
 
 function getQuestions() {
   let question = questionsData[current];
-  quizPage.innerHTML =
-    "<h3 style='margin-bottom:2rem'>" + question.question + "</h3>";
+  quizPage.innerHTML = `
+    <h3 style='margin-bottom:2rem'>${question.question}</h3>
+    <p>Question ${current + 1} of ${questionsData.length}</p>
+  `;
   for (let i = 0; i < question.options.length; i++) {
-    quizPage.innerHTML +=
-      "<button class='btn w-75 btn-lg' onclick=\"takeAnswer('" +
-      question.options[i] +
-      "')\"'>" +
-      question.options[i] +
-      "</button><br><br>";
-  }
-
-  if (current >= questionsData.length) {
-    getResult(nameInput);
+    quizPage.innerHTML += `
+      <button class='btn w-75 btn-lg' onclick="takeAnswer(this, '${question.options[i]}')" ${isAnswered ? "disabled" : ""
+      }>
+        ${question.options[i]}
+      </button>
+      <br><br>
+    `;
   }
 }
 
-function takeAnswer(answer) {
-  answers.push(answer);
-  current++;
-  if (current < questionsData.length) {
-    getQuestions();
+function takeAnswer(option, answer) {
+  if (isAnswered) return;
+
+  isAnswered = true;
+  clearInterval(timer); // Zamanlayıcıyı durdur
+
+  let correctAnswer = questionsData[current].answer;
+  if (option && answer === correctAnswer) {
+    option.innerHTML += ` <i class="fas fa-check-circle"></i>`; // Doğru cevabı işaretle
+    option.classList.add("correctAnswer");
+    quizPage.innerHTML += `<p class="answerMessage correctAnswer"><i class="fas fa-check-circle"></i> Correct Answer! Well Done!</p>`;
   } else {
-    getResult();
+    quizPage.innerHTML += `<p class="answerMessage wrongAnswer"><i class="fas fa-times-circle"></i> Incorrect Answer! The correct answer was ${correctAnswer}.</p>`;
   }
+
+  setTimeout(() => {
+    current++;
+    if (current < questionsData.length) {
+      isAnswered = false;
+      getQuestions();
+      startTimer(); // Yeni soru geldiğinde zamanlayıcıyı başlat
+    } else {
+      getResult();
+    }
+  }, 2000);
 }
 
 function getResult() {
@@ -159,7 +178,31 @@ function getResult() {
   playAgain.addEventListener("click", () => {
     current = 0;
     answers = [];
+    isAnswered = false;
     startQuiz();
     resultPage.style.display = "none";
   });
+}
+
+function startTimer() {
+  let timerElement = document.createElement("div");
+  timerElement.id = "timer";
+  timerElement.innerHTML = `<i class="fas fa-stopwatch"></i> ${formatTime(90)}`;
+  quizPage.appendChild(timerElement);
+
+  let timeRemaining = 90; // Zamanlayıcı için kalan süre (saniye)
+  timer = setInterval(() => {
+    timeRemaining--;
+    timerElement.innerHTML = `<i class="fas fa-stopwatch"></i> ${formatTime(timeRemaining)}`;
+    if (timeRemaining <= 0) {
+      clearInterval(timer);
+      takeAnswer(null, null); // Süre dolduğunda cevap işlemi yap
+    }
+  }, 1000);
+}
+
+function formatTime(seconds) {
+  let mins = Math.floor(seconds / 60);
+  let secs = seconds % 60;
+  return `${mins < 10 ? "0" : ""}${mins}:${secs < 10 ? "0" : ""}${secs}`;
 }
