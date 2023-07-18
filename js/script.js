@@ -113,6 +113,9 @@ function startQuiz() {
 function getQuestions() {
   let question = questionsData[current];
   quizPage.innerHTML = `
+    <div id="timer" class="mb-3">
+      <i class="fas fa-stopwatch"></i> ${formatTime(90)}
+    </div>
     <h3 style='margin-bottom:2rem'>${question.question}</h3>
     <p>Question ${current + 1} of ${questionsData.length}</p>
   `;
@@ -147,7 +150,7 @@ function takeAnswer(option, answer) {
     if (current < questionsData.length) {
       isAnswered = false;
       getQuestions();
-      startTimer();
+      startTimer(); 
     } else {
       getResult();
     }
@@ -185,10 +188,8 @@ function getResult() {
 }
 
 function startTimer() {
-  let timerElement = document.createElement("div");
-  timerElement.id = "timer";
+  let timerElement = document.getElementById("timer");
   timerElement.innerHTML = `<i class="fas fa-stopwatch"></i> ${formatTime(90)}`;
-  quizPage.appendChild(timerElement);
 
   let timeRemaining = 90; 
   timer = setInterval(() => {
@@ -196,7 +197,7 @@ function startTimer() {
     timerElement.innerHTML = `<i class="fas fa-stopwatch"></i> ${formatTime(timeRemaining)}`;
     if (timeRemaining <= 0) {
       clearInterval(timer);
-      takeAnswer(null, null);
+      takeAnswer(null, null); 
     }
   }, 1000);
 }
