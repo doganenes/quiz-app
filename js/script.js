@@ -97,7 +97,7 @@ let resultPage = document.getElementById("resultPage");
 let answers = [];
 let current = 0;
 let isAnswered = false;
-let timer; // Zamanlayıcı değişkeni
+let timer; 
 
 function startQuiz() {
   let nameInput = document.getElementById("name");
@@ -106,7 +106,7 @@ function startQuiz() {
     welcomePage.style.display = "none";
     quizPage.style.display = "block";
     getQuestions();
-    startTimer(); // Zamanlayıcıyı başlat
+    startTimer(); 
   }
 }
 
@@ -131,11 +131,11 @@ function takeAnswer(option, answer) {
   if (isAnswered) return;
 
   isAnswered = true;
-  clearInterval(timer); // Zamanlayıcıyı durdur
+  clearInterval(timer);
 
   let correctAnswer = questionsData[current].answer;
   if (option && answer === correctAnswer) {
-    option.innerHTML += ` <i class="fas fa-check-circle"></i>`; // Doğru cevabı işaretle
+    option.innerHTML += ` <i class="fas fa-check-circle"></i>`; 
     option.classList.add("correctAnswer");
     quizPage.innerHTML += `<p class="answerMessage correctAnswer"><i class="fas fa-check-circle"></i> Correct Answer! Well Done!</p>`;
   } else {
@@ -147,7 +147,7 @@ function takeAnswer(option, answer) {
     if (current < questionsData.length) {
       isAnswered = false;
       getQuestions();
-      startTimer(); // Yeni soru geldiğinde zamanlayıcıyı başlat
+      startTimer();
     } else {
       getResult();
     }
@@ -190,13 +190,13 @@ function startTimer() {
   timerElement.innerHTML = `<i class="fas fa-stopwatch"></i> ${formatTime(90)}`;
   quizPage.appendChild(timerElement);
 
-  let timeRemaining = 90; // Zamanlayıcı için kalan süre (saniye)
+  let timeRemaining = 90; 
   timer = setInterval(() => {
     timeRemaining--;
     timerElement.innerHTML = `<i class="fas fa-stopwatch"></i> ${formatTime(timeRemaining)}`;
     if (timeRemaining <= 0) {
       clearInterval(timer);
-      takeAnswer(null, null); // Süre dolduğunda cevap işlemi yap
+      takeAnswer(null, null);
     }
   }, 1000);
 }
