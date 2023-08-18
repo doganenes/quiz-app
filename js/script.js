@@ -97,7 +97,7 @@ let resultPage = document.getElementById("resultPage");
 let answers = [];
 let current = 0;
 let isAnswered = false;
-let timer; 
+let timer;
 
 function startQuiz() {
   let nameInput = document.getElementById("name");
@@ -106,7 +106,7 @@ function startQuiz() {
     welcomePage.style.display = "none";
     quizPage.style.display = "block";
     getQuestions();
-    startTimer(); 
+    startTimer();
   }
 }
 
@@ -121,8 +121,9 @@ function getQuestions() {
   `;
   for (let i = 0; i < question.options.length; i++) {
     quizPage.innerHTML += `
-      <button class='btn w-75 btn-lg' onclick="takeAnswer(this, '${question.options[i]}')" ${isAnswered ? "disabled" : ""
-      }>
+      <button class='btn w-75 btn-lg' onclick="takeAnswer(this, '${
+        question.options[i]
+      }')" ${isAnswered ? "disabled" : ""}>
         ${question.options[i]}
       </button>
       <br><br>
@@ -132,16 +133,17 @@ function getQuestions() {
 
 function takeAnswer(option, answer) {
   if (isAnswered) return;
-
   isAnswered = true;
   clearInterval(timer);
 
   let correctAnswer = questionsData[current].answer;
   if (option && answer === correctAnswer) {
-    option.innerHTML += ` <i class="fas fa-check-circle"></i>`; 
+    option.innerHTML += ` <i class="fas fa-check-circle"></i>`;
     option.classList.add("correctAnswer");
     quizPage.innerHTML += `<p class="answerMessage correctAnswer"><i class="fas fa-check-circle"></i> Correct Answer! Well Done!</p>`;
+    answers[current] = answer;
   } else {
+    answers[current] = "";
     quizPage.innerHTML += `<p class="answerMessage wrongAnswer"><i class="fas fa-times-circle"></i> Incorrect Answer! The correct answer was ${correctAnswer}.</p>`;
   }
 
@@ -150,7 +152,7 @@ function takeAnswer(option, answer) {
     if (current < questionsData.length) {
       isAnswered = false;
       getQuestions();
-      startTimer(); 
+      startTimer();
     } else {
       getResult();
     }
@@ -191,13 +193,15 @@ function startTimer() {
   let timerElement = document.getElementById("timer");
   timerElement.innerHTML = `<i class="fas fa-stopwatch"></i> ${formatTime(90)}`;
 
-  let timeRemaining = 90; 
+  let timeRemaining = 90;
   timer = setInterval(() => {
     timeRemaining--;
-    timerElement.innerHTML = `<i class="fas fa-stopwatch"></i> ${formatTime(timeRemaining)}`;
+    timerElement.innerHTML = `<i class="fas fa-stopwatch"></i> ${formatTime(
+      timeRemaining
+    )}`;
     if (timeRemaining <= 0) {
       clearInterval(timer);
-      takeAnswer(null, null); 
+      takeAnswer(null, null);
     }
   }, 1000);
 }
